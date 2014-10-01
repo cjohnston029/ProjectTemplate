@@ -69,14 +69,15 @@
               </div>
             </div>
 
+            <!--
             <div class="form-group">
               <label for="genderInput" class="control-label col-md-2">Gender</label>
-              <div class="col-md-4">
-                <input id="rdoGenderMale" class="personalDetails" type="radio" name="rdoGender" value="M">Male 
-                <input id="rdoGenderFemale" class="personalDetails" type="radio" name="rdoGender" value="F">Female
+              <div class="col-md-2">
+                <input id="rdoGenderMale" class="personalDetails" type="radio" name="rdoGender" value="m"> Male 
+                <input id="rdoGenderFemale" class="personalDetails" type="radio" name="rdoGender" value="f"> Female
               </div>
             </div>
-
+            !-->
             <div class="form-group">
               <label for="towninput" class="control-label col-md-2">Town/City</label>
               <div class="col-md-4">
@@ -87,7 +88,7 @@
             <div class="form-group">
               <label for="emailinput" class="control-label col-md-2">Email Address</label>
               <div class="col-md-4">
-                <input id="txtEmail" type="text" name="emailinput" class="form-control personalDetails" placeholder="Your Email Address" />
+                <input id="txtEmail" type="email" name="emailinput" class="form-control personalDetails" placeholder="Your Email Address" />
               </div>
             </div>
 
@@ -95,17 +96,15 @@
               <label for="claiminput" class="control-label col-md-2">No Claim Bonus(in years)</label>
               <div class="col-md-4">
                 <select id="ddlncb" class="form-control">
-                  <option value="0">0</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5+">5+</option>
+                  <option>0</option>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5+</option>
                 </select>
               </div>
             </div>
-
-
 
             <!-- The code for the remainder of the personal fields will be added here -->
 
@@ -121,9 +120,41 @@
 
       <!-- WRAP CAR DETAILS FORM IN CHILD PANEL -->
       <div id="dvCarDetails" class="dvCarDetails">
+      <h1>Please enter your car details</h1>
+      <p>In order to provide you with a quote, we need a few details. Please complete the form below. Thanks.</p>
 
         <!-- Code for the car details section to be added here -->
+      <div class="form-group">
+        <label for="manufacturerinput" class="control-label col-md-2">Manufacturer(in years)</label>
+        <div class="col-md-4">
+          <select id="manufacturer" class="form-control">
+            <option>Select</option>
+            <option>Audi</option>
+            <option>BMW</option>
+            <option>Citroen</option>
+            <option>Mini</option>
+            <option>Toyota</option>
+            <option>Volkswagen</option>
+          </select>
+        </div>
       </div>
+      <br><br>
+      <div class="form-group">
+          <label for="modelInput" class="control-label col-md-2">Model</label>
+          <div class="col-md-4">
+            <input id="txtModel" type="text" name="modelInput" class="form-control" placeholder="Your Model" />
+          </div>
+      </div>
+      <br><br>
+      <div class="form-group">
+        <label for="modelAgeInput" class="control-label col-md-2">Model Age</label>
+        <div class="col-md-4">
+          <input id="modelage" type="number" name="modelAgeInput" class="form-control" placeholder="Model Age" />
+        </div>
+      </div>
+
+    </div>
+
 
 
       <!-- WRAP Quote DETAILS FORM IN CHILD PANEL -->

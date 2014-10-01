@@ -1,4 +1,3 @@
-
 // This is preparation done on the page startup to setup the initial page start
   $().ready(function(){
 
@@ -21,17 +20,19 @@
   });
 
   function showCarDetails() {
-    $("#dvPersonalDetails").hide();
-    $("#dvQuoteDetails").hide();
-    $("#dvCarDetails").show();
 
-    setActiveNavigation("carLink");
+    var emptyFields = validateFields("dvPersonalDetails");
 
-      
-    // Hide the personal details section (dvPersonalDetails)
-    // Hide the quote section (dvQuoteDetails)
-    // Show the car details section (dvCarDetails)
+    if(emptyFields > 0) {
+      $("dvPersonalDetailsAlert").show();
+    }
+    else {
+      $("#dvPersonalDetails").hide();
+      $("#dvQuoteDetails").hide();
+      $("#dvCarDetails").show();
 
+      setActiveNavigation("carLink");
+    }
   }
 
   function showPersonalDetails() {
@@ -48,27 +49,10 @@
 
   function getQuote() {
 
-    // Perform validation to test that all data has been entered
-
-    //if (/* Page is Valid */)
-    //{
-
-      // Get the values from the page elements that you need to create your JSON
-
-      //$.ajax({
-         // type: "GET",
-         // url: "http://localhost:53753/api/rating/CalculateRates",
-         // data: { /* create JSON here */ }
-        //}).done(function(msg) {
-          // Put the return value into Label created on quote details
-          // Hide the Car Details section
-          // Display the quote details page
-      //});
   }
 
-//################################# Helper Functions - look at these when validating and changing section #########################################
+    //##################### HELPERS ##########################
 
-  // Use this function to "Reset" the form and hide all 3 error sections whenever you make a section transition
   function hideErrorAlerts()
   {
     $("#dvPersonalDetailsAlert").hide();
@@ -76,10 +60,74 @@
     $("#dvQuoteDetailsAlert").hide();
   }
 
-  // This function will control the top navigation and set the active tab when you make a section transition
-  // You will need to call it and pass in the tab that needs to be made active
   function setActiveNavigation(activeTab) {
     $(".nav li").removeClass("active");
 
     $("#" + activeTab).addClass("active");
   }
+
+  //##################### VALIDATION ##########################
+
+  function compareValueAgainstRegex(regex, value)
+  {
+    if (regex.test(value))
+    {
+      return false;
+    }
+    return true;
+  }
+
+  function isFieldAlphaNumeric(value) {
+    return compareValueAgainstRegex(/^[a-z0-9]+$/i, value);
+  }
+
+  function isFieldNumeric(value) {
+    return compareValueAgainstRegex(/^[0-9]+$/i, value);
+  }
+
+  function validateSection(section, isContentsCorrect)
+  {
+    var errors = 0;
+    $(section).each(function(){
+
+      var fieldValue = $(this).val();
+
+      if (fieldValue === "")
+        errors++;
+
+      if (isContentsCorrect(fieldValue))
+        errors++;
+
+    });
+    return errors;
+  }
+
+  function validateFields(sectionToValidate) {
+
+    var errors = 0
+
+    errors = errors + validateSection("#" + sectionToValidate + " input:text", isFieldAlphaNumeric); 
+                    + validateSection('#' + sectionToValidate + ' input[type="number"]', isFieldNumeric);
+
+    // Check radio buttons for content: use length tester to ensure that radio button exists
+  /*
+    if ($("#" + sectionToValidate + " input:radio").length && $("#" + sectionToValidate + " input:radio").is(':checked') != true)
+      errors++;
+    alert('radio');
+*/
+    // Check dropdowns have been set
+    $("#" + sectionToValidate + " option:selected").each(function(){
+      if (this.value === "Select"){
+        errors++;
+      }
+    });
+
+    $("#" + sectionToValidate + " .emailVal").each(function() {
+      if (compareValueAgainstRegex(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, $(this).val()))
+        errors++;
+    });
+
+    return errors;
+  }
+
+  
