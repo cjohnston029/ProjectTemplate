@@ -37,13 +37,16 @@
   }
 
   function showPersonalDetails() {
+
       $("#dvCarDetails").hide();
       $("#dvQuoteDetails").hide();
       $("#dvPersonalDetails").show();
   }
 
   function showQuoteDetails() {
+
     var emptyFields = validateFields("dvCarDetails");
+
     if(emptyFields > 0) {
       $("dvCarDetailsAlert").show();
     }
