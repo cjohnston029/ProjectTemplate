@@ -2,6 +2,7 @@
   $().ready(function(){
 
     hideErrorAlerts();
+    $("#dvQuoteDetails").hide();
 
     $("#personalLink a").click(function(){
       showPersonalDetails(); 
@@ -42,9 +43,7 @@
   }
 
   function showQuoteDetails() {
-    alert();
     var emptyFields = validateFields("dvCarDetails");
-    alert(emptyFields);
     if(emptyFields > 0) {
       $("dvCarDetailsAlert").show();
     }
@@ -54,13 +53,47 @@
       $("#dvQuoteDetails").show();
 
       setActiveNavigation("quoteLink");
+
+      // call getquote function to call service
+      getQuote(emptyFields);
     }
       // Hide the car details section (dvCarDetails)
       // Hide the personal details section (dvQuoteDetails)
       // Show the quote section (dvPersonalDetails)
   }
 
-  function getQuote() {
+  function getQuote(emptyFields) {
+
+    if(emptyFields === 0) {
+    
+      // setup variables for ajax call
+      var gender = "m"; //$("#dvPersonalDetails input:radio[name=rdoGender]:checked").val();
+      var age = $ ("#txtNumber").val();
+      var yearsNoClaims = $ ("#ddlncb option:selected").val();
+      var costOfCar = $ ("#value").val();
+      var carStorage = $ ("#storage option:selected").val();
+
+      // log out values to the browser
+      console.log(gender);
+      console.log(age);
+      console.log(yearsNoClaims);
+      console.log(costOfCar);
+      console.log(carStorage);
+
+      $.ajax({
+        type: "GET",
+        url: "http://lit-wrkexp-01.lit.lmig.com:8080/api/calculateRates",
+        data: {gender:gender, age:age, noClaimsBonus:yearsNoClaims, costOfCar:costOfCar, carStorage:carStorage}
+      }).done(function(msg) {
+        $("#txtQuote").text(msg.result.toFixed(2));
+        showQuoteDetails();
+    });
+    }
+
+    else
+    {
+      $("#dvCarDetails").show();
+    }
 
   }
 
@@ -122,7 +155,6 @@
     errors = errors + validateSection("#" + sectionToValidate + " input:text", isFieldAlphaNumeric); 
                     + validateSection('#' + sectionToValidate + ' input[type="number"]', isFieldNumeric);
 
-    alert(errors);
 
     // Check radio buttons for content: use length tester to ensure that radio button exists
   /*
