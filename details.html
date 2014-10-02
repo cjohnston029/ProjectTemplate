@@ -124,6 +124,8 @@
       <p>In order to provide you with a quote, we need a few details. Please complete the form below. Thanks.</p>
 
         <!-- Code for the car details section to be added here -->
+        <div class="row">
+          <form class="form-horizontal">
       <div class="form-group">
         <label for="manufacturerinput" class="control-label col-md-2">Manufacturer(in years)</label>
         <div class="col-md-4">
@@ -138,14 +140,14 @@
           </select>
         </div>
       </div>
-      <br><br>
+
       <div class="form-group">
           <label for="modelInput" class="control-label col-md-2">Model</label>
           <div class="col-md-4">
             <input id="txtModel" type="text" name="modelInput" class="form-control" placeholder="Your Model" />
           </div>
       </div>
-      <br><br>
+
       <div class="form-group">
         <label for="modelAgeInput" class="control-label col-md-2">Model Age</label>
         <div class="col-md-4">
@@ -153,8 +155,38 @@
         </div>
       </div>
 
-    </div>
 
+      <div class="form-group">
+          <label for="engineInput" class="control-label col-md-2">Engine Size</label>
+          <div class="col-md-4">
+            <input id="txtEngine" type="text" name="engineInput" class="form-control" placeholder="Model Engine" />
+          </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="storageinput" class="control-label col-md-2">Storage</label>
+        <div class="col-md-4">
+          <select id="storage" class="form-control">
+            <option>Select</option>
+            <option>Garage</option>
+            <option>Driveway</option>
+            <option>Cul-de-sac</option>
+            <option>Public Road</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="valueInput" class="control-label col-md-2">Estimated Value</label>
+        <div class="col-md-4">
+          <input id="value" type="number" name="valueInput" class="form-control" placeholder="Model Value" />
+        </div>
+      </div>
+
+
+    </form>
+    </div>
+  </div>    
 
 
       <!-- WRAP Quote DETAILS FORM IN CHILD PANEL -->
