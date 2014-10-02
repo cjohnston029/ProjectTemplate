@@ -36,12 +36,25 @@
   }
 
   function showPersonalDetails() {
-      // Hide the car details section (dvCarDetails)
-      // Hide the quote section (dvQuoteDetails)
-      // Show the personal details section (dvPersonalDetails)
+      $("#dvCarDetails").hide();
+      $("#dvQuoteDetails").hide();
+      $("#dvPersonalDetails").show();
   }
 
   function showQuoteDetails() {
+    alert();
+    var emptyFields = validateFields("dvCarDetails");
+    alert(emptyFields);
+    if(emptyFields > 0) {
+      $("dvCarDetailsAlert").show();
+    }
+    else {
+      $("#dvPersonalDetails").hide();
+      $("#dvCarDetails").hide();
+      $("#dvQuoteDetails").show();
+
+      setActiveNavigation("quoteLink");
+    }
       // Hide the car details section (dvCarDetails)
       // Hide the personal details section (dvQuoteDetails)
       // Show the quote section (dvPersonalDetails)
@@ -108,6 +121,8 @@
 
     errors = errors + validateSection("#" + sectionToValidate + " input:text", isFieldAlphaNumeric); 
                     + validateSection('#' + sectionToValidate + ' input[type="number"]', isFieldNumeric);
+
+    alert(errors);
 
     // Check radio buttons for content: use length tester to ensure that radio button exists
   /*

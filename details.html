@@ -159,7 +159,7 @@
       <div class="form-group">
           <label for="engineInput" class="control-label col-md-2">Engine Size</label>
           <div class="col-md-4">
-            <input id="txtEngine" type="text" name="engineInput" class="form-control" placeholder="Model Engine" />
+            <input id="txtEngine" type="number" name="engineInput" class="form-control" placeholder="Model Engine" />
           </div>
       </div>
       
@@ -183,6 +183,12 @@
         </div>
       </div>
 
+      <div class="form-group">
+        <div class="col-md-4">
+          <input id="btnBack" value="Back" type="button" class="btn btn-default btn-sm btn-success" onclick="showPersonalDetails()" />
+          <input id="btnGetQuote" value="Get Quote" type="button" class="btn btn-default btn-sm btn-success" onclick="showQuoteDetails()" />
+        </div>
+      </div>
 
     </form>
     </div>
